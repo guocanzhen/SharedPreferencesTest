@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -20,6 +21,17 @@ public class MainActivity extends AppCompatActivity {
             edit.putInt("age", 18);
             edit.putBoolean("marry", false);
             edit.apply();
+        });
+
+        Button restoreData = findViewById(R.id.restore_data);
+        restoreData.setOnClickListener(v -> {
+            SharedPreferences pref = getSharedPreferences("data", MODE_PRIVATE);
+            String name = pref.getString("name", "");
+            int age = pref.getInt("age", 0);
+            boolean marry = pref.getBoolean("marry", false);
+            Log.d("MainActivity", "name is " + name);
+            Log.d("MainActivity", "age is " + age);
+            Log.d("MainActivity", "marry is " + marry);
         });
     }
 }
